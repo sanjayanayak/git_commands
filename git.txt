@@ -1,0 +1,111 @@
+commit: Different versions of project can be made by using commit
+Branch: By default all commits are on master branch, branches enable independent development of the project.  A branch can be created to work on a version of the project that other branches do not know about. 
+A pull request is a request for others to review and approve the changes made to the project on a branch.
+
+Show commit logs history:
+
+git-log
+
+Local Repository command:
+
+
+git init # initialize git
+
+git add <file name> # adding to staging area
+
+git commit -m <message>
+
+# push to remote repository
+git remote add origin ssh://securens@192.168.2.108:/home/securens/rnd/rough/git-setup/remote-repo/workshop.git
+
+git push <origin / remote location> <branch name>
+Example: git push origin master
+
+
+Creating New Branch:
+
+git branch <branch name>
+git checkout -b <branch name> # To work immediately in created branch
+
+git branch # check for working branch name
+
+git clone -b <branch name> <remote location> # Cloning from remote repo to local repo
+
+Example: git clone -b mybranch securens@192.168.2.108:/home/securens/rnd/rough/git-setup/remote-repo/workshop.git
+
+Pushing:git push origin mybranch
+
+Switching between branches:
+
+git checkout <branch name>
+
+Visualizing Progress Through Branches:
+git log --graph --all
+
+
+
+
+
+
+
+Remote Repository Command:
+
+
+First, create a new local git repository and add all files within this folder.
+
+cd ˜/workshop
+git init
+git add .
+git commit -m "initial repository creation"
+
+Create the bare repository:
+
+git clone --bare .git ../workshop.git
+scp -r ../workshop.git ralfwehner@localhost:/Users/ralfwehner/gitrepos/workspace.git
+
+From client side the developer’s project must be pushed into the new bare server repository:
+
+git remote add origin ssh://ralfwehner@dev-server/Users/ralfwehner/gitrepos/workshop.git
+git push origin master
+
+
+
+
+
+.gitconfig: present in home directory
+nano ~/.gitconfig : present in home folder (U Can create setting there)
+git config --global --list # To check the setting of user name and email id
+
+git config --global --unset-all user.name #To unset user name from .gitconfig file
+
+git config --global --unset-all user.email #To unset user email from .gitconfig file
+ 
+
+Configure .gitconfig file according to your email id , user name
+
+git config --global user.email <sanjaya.nayak@securens.in>
+git config --global user.name <sanjaya.nayak@securens.in>
+
+Check branches:
+git branch -a
+
+Delete remote and local branch:
+
+Deleting a remote branch:
+
+git push origin --delete <branch>  # Git version 1.7.0 or newer
+git push origin :<branch>          # Git versions older than 1.7.0
+
+Deleting a local branch:
+
+git branch --delete <branch>
+git branch -d <branch> # Shorter version
+git branch -D <branch> # Force delete un-merged branches
+
+Deleting a local remote-tracking branch:
+
+git branch --delete --remotes <remote>/<branch>
+git branch -dr <remote>/<branch> # Shorter
+
+git fetch <remote> --prune # Delete multiple obsolete tracking branches
+git fetch <remote> -p      # Shorter
